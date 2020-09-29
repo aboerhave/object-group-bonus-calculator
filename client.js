@@ -41,3 +41,43 @@ const employees = [
 // Ask questions when you don't.
 
 console.log( employees );
+
+// Write a declared function that takes in one Employee object (as an argument to the function), and returns a new object with the following properties:
+
+//     The name property should contain the employee's name.
+//     The bonusPercentage property should contain the bonus percentage the employee is to receive. See section below for calculation instructions.
+//     The totalCompensation property should be the adjusted annual compensation (base annual + bonus)
+//     The totalBonus should be the employee's total bonus rounded to the nearest dollar.
+
+    function bonusCalculation(employeeObject) {
+      console.log(employeeObject);
+      let newObject = {
+        name: employeeObject.name,
+        bonusPercentage: 0,
+        totalCompensation: 0,
+        totalBonus: 0
+      }
+      if (employeeObject.reviewRating <= 2) {
+        newObject.bonusPercentage = 0;
+      }
+      else if (employeeObject.reviewRating == 3) {
+        newObject.bonusPercentage = 0.04;
+      }
+      else if (employeeObject.reviewRating == 4) {
+        newObject.bonusPercentage = 0.06;
+      }
+      else if (employeeObject.reviewRating <= 5) {
+        newObject.bonusPercentage = 0.10;
+      }
+
+      if (employeeObject.employeeNumber < 10000) {
+        newObject.bonusPercentage += 0.05;
+      }
+
+      return newObject;
+    }
+
+    for (let i = 0; i < employees.length; i++) {
+      console.log(bonusCalculation(employees[i]));
+    }
+    

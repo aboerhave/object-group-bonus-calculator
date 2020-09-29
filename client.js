@@ -73,7 +73,19 @@ console.log( employees );
       if (employeeObject.employeeNumber < 10000) {
         newObject.bonusPercentage += 0.05;
       }
-
+      if (employeeObject.annualSalary > 65000) {
+        newObject.bonusPercentage -= 0.01;
+      }
+      if (newObject.bonusPercentage < 0) {
+        newObject.bonusPercentage = 0;
+      }
+      else if (newObject.bonusPercentage > .13) {
+        newObject.bonusPercentage = .13;
+      }
+      // doing total bonus first
+      newObject.totalBonus = Number(employeeObject.annualSalary * newObject.bonusPercentage);
+      newObject.totalCompensation = Number(employeeObject.annualSalary) + newObject.totalBonus;
+      
       return newObject;
     }
 
@@ -81,3 +93,4 @@ console.log( employees );
       console.log(bonusCalculation(employees[i]));
     }
     
+

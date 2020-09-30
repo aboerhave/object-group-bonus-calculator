@@ -1,3 +1,5 @@
+$(document).ready(readyNow);
+
 const employees = [
   {
     name: 'Atticus',
@@ -57,6 +59,7 @@ console.log( employees );
         totalCompensation: 0,
         totalBonus: 0
       }
+      // we calculate the percentage of bonus for each person object
       if (employeeObject.reviewRating <= 2) {
         newObject.bonusPercentage = 0;
       }
@@ -70,12 +73,15 @@ console.log( employees );
         newObject.bonusPercentage = 0.10;
       }
 
+      // we calculate the addition of 5% to the bonus if they have been employed long time
       if (employeeObject.employeeNumber < 10000) {
         newObject.bonusPercentage += 0.05;
       }
+      // 1% subtracted if salary too high
       if (employeeObject.annualSalary > 65000) {
         newObject.bonusPercentage -= 0.01;
       }
+      // sets bonus to only be between 0 and 13%
       if (newObject.bonusPercentage < 0) {
         newObject.bonusPercentage = 0;
       }
@@ -89,8 +95,23 @@ console.log( employees );
       return newObject;
     }
 
+    function bonusCheck() {
+    let newArray = [];
     for (let i = 0; i < employees.length; i++) {
+      let el = $('#output');
       console.log(bonusCalculation(employees[i]));
+      
+      newArray.push(bonusCalculation(employees[i]));
+      console.log(newArray[i].name);
+      el.append('<li>' + newArray[i].name + ' - Bonus Percentage: ' + (newArray[i].bonusPercentage * 100) + '% Total Bonus: $' + newArray[i].totalBonus + ' Total Compensation: $' + newArray[i].totalCompensation + '</li>');
+      
+      //el.append('hello')
+      //el.append('<li>' + employeeBonus.name + ' ' + employeeBonus.bonusPercentage + ' ' + employeeBonus.totalBonus + ' ' + employeeBonus.totalCompensation + '</li>');
     }
-    
+  }
 
+    
+    function readyNow() {
+      console.log('JQ');
+      $('#bonus').on('click', bonusCheck);
+    } // end readyNow
